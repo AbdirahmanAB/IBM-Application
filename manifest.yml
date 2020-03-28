@@ -4,4 +4,4 @@ applications:
   memory: 128M
   buildpack: sdk-for-nodejs
   services:
-  - IOT PLATFORM NAME
+  - Internet of Things Platform - Test
