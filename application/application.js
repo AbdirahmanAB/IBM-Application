@@ -27,7 +27,7 @@ class Application extends EventEmitter {
       console.log("Connected the application.");
       
       /* Subscribe to temperature event on device types of IBM-KTH-Demo and where the device ID is 0. */
-      that.app_client.subscribeToDeviceEvents("IBM-KTH", "0", "device_data");
+      that.app_client.subscribeToDeviceEvents("IBM-KTH", "0", "device_update_message_request");
       
       /* On a data recieved, emit event. */
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
@@ -35,7 +35,7 @@ class Application extends EventEmitter {
         //that.emit('payload', payload);
         var myData={'DelaySeconds' : 10};
         myData = JSON.stringify(myData);
-        appClient.publishDeviceCommand("IBM-KTH","0", "message", "json", myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "message", "json", myData);
       });
     });
   }
