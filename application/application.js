@@ -33,9 +33,9 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
         //that.emit('payload', payload);
-        var myData={'DelaySeconds' : 10};
+        var myData= 'If you receive this message. Congrats!';
         myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "message", "json", myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       });
     });
   }
