@@ -34,21 +34,19 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
             // Make a request for a user with a given1f4 ID
-        axios.get('https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f60024285')
-        .then(function (response) {
-          // handle success
-          var myData = "test";
-          myData = response.display.message.text;
-          myData = JSON.stringify(myData);
-          that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .then(function () {
-          // always executed
-        });
+        var url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f60024285';
+        async function getUser() {
+          try {
+            const response = await axios.get(url);
+            var myData = "test";
+            myData = response.display.message.text;
+            myData = JSON.stringify(myData);
+            that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
       });
     });
   }
