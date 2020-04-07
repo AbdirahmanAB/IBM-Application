@@ -49,7 +49,7 @@ class Application extends EventEmitter {
           // always executed
         });*/
 
-        fetch("https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4", 
+        await fetch("https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4", 
        {"method": "GET"}).catch(er=>console.log(er)).then(function (response) {
         // handle success
         var myData = response.display.message.text;
