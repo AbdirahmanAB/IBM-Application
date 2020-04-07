@@ -36,7 +36,7 @@ class Application extends EventEmitter {
         //that.emit('payload', payload);
         
             // Make a request for a user with a given ID
-        axios.get('https://iot-display.herokuapp.com/display/get/1')
+        /*axios.get('https://iot-display.herokuapp.com/display/get/1')
         .then(function (response) {
           // handle success
           var myData= 'Big Barack O-Bombaclat';
@@ -52,11 +52,11 @@ class Application extends EventEmitter {
         })
         .then(function () {
           // always executed
-        });
+        });*/
         
-        /*var myData= 'Big Barack O-Bombaclat';
+        var myData= 'Big Barack O-Bombaclat';
         myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);*/
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       });
     });
   }
