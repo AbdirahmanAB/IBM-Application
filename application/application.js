@@ -1,5 +1,5 @@
 var iotf = require("ibmiotf");
-//var axios = require('axios');
+const axios = require('axios');
 var EventEmitter = require('events');
 
 class Application extends EventEmitter {
@@ -36,7 +36,7 @@ class Application extends EventEmitter {
         //that.emit('payload', payload);
         
             // Make a request for a user with a given ID
-        /*axios.get('https://iot-display.herokuapp.com/display/get/1')
+        axios.get('https://iot-display.herokuapp.com/display/get/1')
         .then(function (response) {
           // handle success
           var myData= 'Big Barack O-Bombaclat';
@@ -52,12 +52,24 @@ class Application extends EventEmitter {
         })
         .then(function () {
           // always executed
-        });*/
+        });
+        /*const url = "https://iot-display.herokuapp.com/display/get/1";
+        const getData = async url => {
+          try {
+            const response = await axios.get(url);
+            const data = response.display.message.text;
+            data = JSON.stringify(data);
+            that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", data);
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        //that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+        getData(url)
         
-        var myData= fetch("https://iot-display.herokuapp.com/display/get/1",{ "method": "GET"}).catch(er=>console.log(er)).then(response => response.json()).then(res => res.display.message.text);
- 
+        /*var myData= fetch("https://iot-display.herokuapp.com/display/get/1",{ "method": "GET"}).catch(er=>console.log(er)).then(response => response.json()).then(res => res.display.message.text);
         myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);*/
       });
     });
   }
