@@ -39,9 +39,11 @@ class Application extends EventEmitter {
         axios.get('https://iot-display.herokuapp.com/display/get/1')
         .then(function (response) {
           // handle success
-          var myData;
+          var myData= 'Big Barack O-Bombaclat';
+          myData = JSON.stringify(myData);
+          //var myData;
           //myData = JSON.stringify(response);
-          myData = JSON.stringify(response.display.message.text);
+          //myData = JSON.stringify(response.display.message.text);
           that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
         })
         .catch(function (error) {
