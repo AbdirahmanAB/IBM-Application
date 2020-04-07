@@ -1,4 +1,5 @@
 var iotf = require("ibmiotf");
+const axios = require('axios');
 var EventEmitter = require('events');
 
 class Application extends EventEmitter {
@@ -21,7 +22,7 @@ class Application extends EventEmitter {
     /* Application (Your front-end) */
     this.app_client = new iotf.IotfApplication(app_config);
     this.app_client.connect();
-    
+
     /* When your application has connected, setup listeners and callbacks. */
     this.app_client.on("connect", function () {
       console.log("Connected the application.");
@@ -33,9 +34,26 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
         //that.emit('payload', payload);
-        var myData= 'Big Barack O-Bombaclat';
+        
+            // Make a request for a user with a given ID
+        axios.get('https://iot-display.herokuapp.com/display/get/1')
+        .then(function (response) {
+          // handle success
+          var myData= 'congrats!';
+          myData = JSON.stringify(myData);
+          that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .then(function () {
+          // always executed
+        });
+        
+        /*var myData= 'Big Barack O-Bombaclat';
         myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);*/
       });
     });
   }
