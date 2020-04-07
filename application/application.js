@@ -40,8 +40,8 @@ class Application extends EventEmitter {
         .then(function (response) {
           // handle success
           var myData;
-          //myData = JSON.stringify(response);
-          myData = JSON.stringify(response.message.text);
+          myData = JSON.stringify(response);
+          //myData = JSON.stringify(response.message.text);
           that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
         })
         .catch(function (error) {
