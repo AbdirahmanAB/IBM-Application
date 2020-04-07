@@ -46,7 +46,7 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
             // Make a request for a user with a given1f4 I
-        getu();
+        getu(url);
 
       });
     });
