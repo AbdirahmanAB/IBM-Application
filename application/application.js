@@ -34,7 +34,7 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
             // Make a request for a user with a given1f4 ID
-        var url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f60024285';
+        var url = 'https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4';
         async function getUser() {
           try {
             const response = await axios.get(url);
@@ -46,6 +46,7 @@ class Application extends EventEmitter {
             console.error(error);
           }
         }
+        
 
       });
     });
