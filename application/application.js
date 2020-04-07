@@ -1,5 +1,5 @@
 var iotf = require("ibmiotf");
-const axios = require('axios');
+//var axios = require('axios');
 var EventEmitter = require('events');
 
 class Application extends EventEmitter {
@@ -54,7 +54,8 @@ class Application extends EventEmitter {
           // always executed
         });*/
         
-        var myData= 'Big Barack O-Bombaclat';
+        var myData= fetch("https://iot-display.herokuapp.com/display/get/1",{ "method": "GET"}).catch(er=>console.log(er)).then(response => response.json()).then(res => res.display.message.text);
+ 
         myData = JSON.stringify(myData);
         that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       });
