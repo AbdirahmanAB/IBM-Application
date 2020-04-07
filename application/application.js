@@ -22,16 +22,7 @@ class Application extends EventEmitter {
     /* Application (Your front-end) */
     this.app_client = new iotf.IotfApplication(app_config);
     this.app_client.connect();
-
-    async function getUser() {
-      try {
-        const response = await axios.get('https://iot-display.herokuapp.com/display/get/1');
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", response.display.message.text);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
+    
     /* When your application has connected, setup listeners and callbacks. */
     this.app_client.on("connect", function () {
       console.log("Connected the application.");
@@ -44,16 +35,13 @@ class Application extends EventEmitter {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
         //that.emit('payload', payload);
         
-        getUser();
-
             // Make a request for a user with a given ID
-        /*axios.get('https://iot-display.herokuapp.com/display/get/1')
+        axios.get('https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4')
         .then(function (response) {
           // handle success
           //var myData= 'Big Barack O-Bombaclat';
           //myData = JSON.stringify(myData);
           var myData;
-          myData = JSON.stringify(response);
           myData = JSON.stringify(response.display.message.text);
           that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
         })
