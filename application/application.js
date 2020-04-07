@@ -33,16 +33,12 @@ class Application extends EventEmitter {
       /* On a data recieved, emit event. */
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
-        //that.emit('payload', payload);
-        
             // Make a request for a user with a given ID
         axios.get('https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4')
         .then(function (response) {
           // handle success
-          //var myData= 'Big Barack O-Bombaclat';
-          //myData = JSON.stringify(myData);
-          var myData;
-          myData = JSON.stringify(response.display.message.text);
+          var myData = response.display.message.text;
+          myData = JSON.stringify(myData);
           that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
         })
         .catch(function (error) {
@@ -52,23 +48,6 @@ class Application extends EventEmitter {
         .then(function () {
           // always executed
         });
-        /*const url = "https://iot-display.herokuapp.com/display/get/1";
-        const getData = async url => {
-          try {
-            const response = await axios.get(url);
-            const data = response.display.message.text;
-            data = JSON.stringify(data);
-            that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", data);
-          } catch (error) {
-            console.log(error);
-          }
-        };
-        //that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
-        getData(url)
-        
-        /*var myData= fetch("https://iot-display.herokuapp.com/display/get/1",{ "method": "GET"}).catch(er=>console.log(er)).then(response => response.json()).then(res => res.display.message.text);
-        myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);*/
       });
     });
   }
