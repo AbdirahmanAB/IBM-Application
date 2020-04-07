@@ -33,8 +33,8 @@ class Application extends EventEmitter {
       /* On a data recieved, emit event. */
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
-            // Make a request for a user with a given ID
-        axios.get('https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4')
+            // Make a request for a user with a given1f4 ID
+        /*axios.get('https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f60024285')
         .then(function (response) {
           // handle success
           var myData = response.display.message.text;
@@ -47,7 +47,16 @@ class Application extends EventEmitter {
         })
         .then(function () {
           // always executed
-        });
+        });*/
+
+        fetch("https://iot-display.herokuapp.com/display/get/5e8c8382c5c0f600242851f4", 
+       {"method": "GET"}).catch(er=>console.log(er)).then(function (response) {
+        // handle success
+        var myData = response.display.message.text;
+        myData = JSON.stringify(myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
+      });
+
       });
     });
   }
