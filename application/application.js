@@ -27,7 +27,7 @@ class Application extends EventEmitter {
     const getu = async url => {
       try {
         const response = await axios.get(url);
-        const myData = myData = response.display.message.text;
+        const myData = myData = response.data.display.message.text;
         myData = JSON.stringify(myData);
         that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       } catch (error) {
@@ -45,7 +45,6 @@ class Application extends EventEmitter {
       /* On a data recieved, emit event. */
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
-            // Make a request for a user with a given1f4 I
         getu(url);
 
       });
