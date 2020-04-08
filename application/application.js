@@ -28,8 +28,9 @@ class Application extends EventEmitter {
       try {
         const response = await axios.get(url);
         const myData = response.data.display.message.text;
-        //myData = JSON.stringify(myData);
-        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "String", myData);
+        myData = JSON.stringify(myData);
+        //that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "String", myData);
+        that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       } catch (error) {
         console.error(error);
       }
