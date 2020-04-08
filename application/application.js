@@ -27,7 +27,7 @@ class Application extends EventEmitter {
     const getu = async url => {
       try {
         const response = await axios.get(url);
-        const myData = myData = response.data.display.message.text;
+        const myData = response.data.display.message.text;
         myData = JSON.stringify(myData);
         that.app_client.publishDeviceCommand("IBM-KTH","0", "currentMessage", "json", myData);
       } catch (error) {
@@ -46,7 +46,6 @@ class Application extends EventEmitter {
       that.app_client.on("deviceEvent", async function (deviceType, deviceId, eventType, format, payload) {
         //console.log("Device Event from :: " +deviceType + " : " + deviceId + " of event " + eventType + " with payload : " + payload);
         getu(url);
-
       });
     });
   }
